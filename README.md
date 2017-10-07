@@ -9,6 +9,7 @@ Clone the project and run the following
 `$ sequelize db:migrate`
 
 Fire up applicaiton using 
+
 `$npm start`
 
 or
