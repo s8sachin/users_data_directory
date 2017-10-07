@@ -2,8 +2,15 @@
 
 Clone the project and run the following
 
-`$npm install`
+`$ npm install`
 
-`$sequelize db:create`
+`$ sequelize db:create`
 
-`$sequelize db:migrate`
+`$ sequelize db:migrate`
+
+Fire up applicaiton using 
+`$npm start`
+
+or
+
+`$ DEBUG=users-data-directory:* nodemon npm start`
