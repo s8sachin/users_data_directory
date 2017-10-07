@@ -10,7 +10,14 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res) => {
-  // Fill
+  models.User.create({
+    firstName: req.body.firstName.trim(),
+    lastName: req.body.lastName.trim(),
+    email: req.body.email.trim()
+  })
+  .then(() => res.send("User created successfully"), (e) => {
+    res.send(e);
+  })
 });
 
 module.exports = router;

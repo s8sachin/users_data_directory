@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      isEmail: true
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true
+      }
     }
   }, {
     classMethods: {
