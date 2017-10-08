@@ -15,3 +15,7 @@ Fire up applicaiton using
 or
 
 `$ DEBUG=users-data-directory:* nodemon npm start`
+
+Debug the application using `pryjs`
+
+`eval((require 'pryjs').it)`
