@@ -42,6 +42,21 @@ router.delete('/:id', (req, res) => {
 });
 
 /* GET one user by id. */
+router.put('/:id', (req, res) => {
+  models.User.find({where: {id: req.params.id}})
+  .then((user) => {
+    if(!user){
+      return res.status(400).send('User not found');
+    }
+    user.updateAttributes({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    }).then((user) => res.send({
+      msg: 'user updated successfully',
+      user: user
+    }));
+  }).catch((e) => res.send(e));
+});
 
 
 module.exports = router;
