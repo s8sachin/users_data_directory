@@ -2,13 +2,16 @@ var models  = require('../models');
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* GET all users listing. */
 router.get('/', (req, res, next) => {
   models.User.findAll().then((users) => {
     res.send(users);
-  })
+  }, (e) => {
+    res.send(e);
+  });
 });
 
+/* POST new user. */
 router.post('/', (req, res) => {
   models.User.create({
     firstName: req.body.firstName.trim(),
@@ -19,5 +22,26 @@ router.post('/', (req, res) => {
     res.send(e);
   })
 });
+
+/* GET one user by id. */
+router.get('/:id', (req, res, next) => {
+  models.User.findOne({where: {id: req.params.id}})
+  .then((user) => {
+    res.send(user);
+  }, (e) => {
+    res.send(e);
+  });
+});
+
+/* DELETE one user by id. */
+router.delete('/:id', (req, res) => {
+  models.User.destroy({ where: {id: req.params.id}})
+  .then(() => res.send('User deleted successfully'), (e) => {
+    res.send(e);
+  });
+});
+
+/* GET one user by id. */
+
 
 module.exports = router;
