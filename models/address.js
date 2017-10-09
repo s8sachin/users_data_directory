@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
+        Address.belongsTo(models.User, {
+          foreignKey: 'userId'
+        })
       }
     }
   });

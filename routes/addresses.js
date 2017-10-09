@@ -4,7 +4,9 @@ var router = express.Router();
 
 /* GET all address listing. */
 router.get('/', (req, res, next) => {
-  models.Address.findAll().then((addresses) => {
+  models.Address.findAll({
+    include: [ models.User ]
+  }).then((addresses) => {
     res.send(addresses);
   }, (e) => {
     res.send(e);
