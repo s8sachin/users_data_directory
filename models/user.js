@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true
       }
     },
-    password: DataTypes.STRING,
-    password_confirm: DataTypes.STRING
+    password: DataTypes.STRING
   });
 
   User.associate = function(models) {
