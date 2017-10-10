@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isEmail: true
       }
-    }
+    },
+    passwordHash: DataTypes.STRING
   });
 
   User.associate = function(models) {
