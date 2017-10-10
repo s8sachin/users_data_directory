@@ -5,15 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     zip: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-        Address.belongsTo(models.User, {
-          foreignKey: 'userId'
-        })
-      }
-    }
   });
+
+  Address.associate = function(models){
+    Address.belongsTo(models.User, {
+      onDelete: 'CASCADE', 
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  }
   return Address;
 };

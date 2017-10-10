@@ -4,7 +4,9 @@ var router = express.Router();
 
 /* GET all users listing. */
 router.get('/', (req, res, next) => {
-  models.User.findAll().then((users) => {
+  models.User.findAll({
+    include: [ models.Address ]
+  }).then((users) => {
     res.send(users);
   }, (e) => {
     res.send(e);
@@ -25,12 +27,12 @@ router.post('/', (req, res) => {
 
 /* GET one user by id. */
 router.get('/:id', (req, res, next) => {
-  models.User.findOne({where: {id: req.params.id}})
+  models.User.findOne({where: {id: req.params.id}, 
+    include: [ models.Address ]
+  })
   .then((user) => {
     res.send(user);
-  }, (e) => {
-    res.send(e);
-  });
+  }).catch((e) => res.send(e));
 });
 
 /* DELETE one user by id. */
