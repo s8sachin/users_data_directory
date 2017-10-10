@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
           firstName: req.body.firstName.trim(),
           lastName: req.body.lastName.trim(),
           email: req.body.email.trim(),
-          password: hash
+          passwordHash: hash
         })
         .then(() => res.send({message: "User created successfully", status: 200}), 
           (e) => {
