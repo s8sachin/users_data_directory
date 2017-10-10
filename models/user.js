@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true
       }
     }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
   });
+
+  User.associate = function(models) {
+    User.hasMany(models.Address, {
+      foreignKey: 'UserId'
+    });
+  }
   return User;
 };
