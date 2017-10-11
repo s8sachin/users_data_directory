@@ -19,14 +19,13 @@ router.post('/', (req, res) => {
   if(req.body.password.trim() == req.body.password_confirm.trim()) { 
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(req.body.password.trim(), salt, (err, hash) => {
-        console.log(hash);
         models.User.create({
           firstName: req.body.firstName.trim(),
           lastName: req.body.lastName.trim(),
           email: req.body.email.trim(),
           passwordHash: hash
         })
-        .then(() => res.send({message: "User created successfully", status: 200}), 
+        .then(() => res.status(200).send({message: "User created successfully", status: 200}), 
           (e) => {
             res.send(e);
           })
@@ -34,7 +33,7 @@ router.post('/', (req, res) => {
     });
   }
   else{
-    res.send({error: 'passwords do not match', status: 422})
+    res.status(422).send({error: 'passwords do not match', status: 422})
   }
 });
 
