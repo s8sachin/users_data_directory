@@ -10,13 +10,14 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         isEmail: true
       }
-    }
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
+    },
+    passwordHash: DataTypes.STRING
   });
+
+  User.associate = function(models) {
+    User.hasMany(models.Address, {
+      foreignKey: 'UserId'
+    });
+  }
   return User;
 };
