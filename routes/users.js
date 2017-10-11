@@ -1,7 +1,6 @@
 var models  = require('../models');
 var express = require('express');
 var router = express.Router();
-var bcrypt = require('bcryptjs')
 
 /* GET all users listing. */
 router.get('/', (req, res, next) => {
@@ -17,23 +16,19 @@ router.get('/', (req, res, next) => {
 /* POST new user. */
 router.post('/', (req, res) => {
   if(req.body.password.trim() == req.body.password_confirm.trim()) { 
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(req.body.password.trim(), salt, (err, hash) => {
-        models.User.create({
-          firstName: req.body.firstName.trim(),
-          lastName: req.body.lastName.trim(),
-          email: req.body.email.trim(),
-          passwordHash: hash
-        })
-        .then(() => res.status(200).send({message: "User created successfully", status: 200}), 
-          (e) => {
-            res.send(e);
-          })
-      })
-    });
+    models.User.create({
+      firstName: req.body.firstName.trim(),
+      lastName: req.body.lastName.trim(),
+      email: req.body.email.trim(),
+      passwordHash: req.body.password.trim()
+    })
+    .then(() => {
+      res.status(200).send({message: "User created successfully"});
+    })
+    .catch(e => res.send(e));
   }
   else{
-    res.status(422).send({error: 'passwords do not match', status: 422})
+    res.status(422).send({error: 'passwords do not match'});
   }
 });
 

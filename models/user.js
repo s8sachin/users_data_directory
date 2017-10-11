@@ -1,4 +1,6 @@
 'use strict';
+var bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     firstName: DataTypes.STRING,
@@ -19,5 +21,16 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'UserId'
     });
   }
+
+  User.beforeCreate((user, options) => {
+    return bcrypt.hash(user.passwordHash, 10)
+    .then(hash => {
+      user.passwordHash = hash;
+    })
+    .catch(err => { 
+      throw new Error(); 
+    });
+  });
+
   return User;
 };
