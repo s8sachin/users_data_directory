@@ -18,4 +18,4 @@ or
 
 Debug the application using `pryjs`
 
-`eval((require 'pryjs').it)`
+`eval(require('pryjs').it)`
